@@ -15,6 +15,7 @@
 
 CChildView::CChildView()
 {
+	object.CreateCharacter(0, 0);
 }
 
 CChildView::~CChildView()
@@ -24,6 +25,11 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
+	ON_WM_LBUTTONDOWN()
+//	ON_WM_LBUTTONUP()
+ON_WM_RBUTTONDOWN()
+ON_WM_KEYDOWN()
+ON_WM_KEYUP()
 END_MESSAGE_MAP()
 
 
@@ -46,8 +52,102 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 void CChildView::OnPaint() 
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
-	
-	
-	dc.Rectangle(100, 100, 200, 200);
+
+	CBitmap bitmap;
+	bitmap.LoadBitmap(IDB_BITMAP1);
+	BITMAP bmpinfo;
+	bitmap.GetBitmap(&bmpinfo);
+	CDC dcmem;
+	dcmem.CreateCompatibleDC(&dc);
+	dcmem.SelectObject(&bitmap);
+
+	CRect rect;
+	GetWindowRect(&rect);
+	for (int i = 0; i <= rect.bottom; i += B_SIZE) {   //가로선
+		dc.MoveTo(0, i);
+		dc.LineTo(rect.right, i);
+	}
+	for (int i = 0; i <= rect.right; i += B_SIZE) {    //세로선
+		dc.MoveTo(i, 0);
+		dc.LineTo(i, rect.bottom);
+	}
+	POSITION p;
+	for (p = object.Tile_list.GetHeadPosition(); p != NULL;)    //블록출력
+	{
+		CPoint pos(object.Tile_list.GetNext(p));
+		dc.BitBlt(pos.x, pos.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+	}
+	if (object.c_visible)   //캐릭출력
+	{
+		object.move();
+		object.check();
+		dc.BitBlt(object.c_pos.x, object.c_pos.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+	}
+
+	Sleep(1000 / 16);     //프레임
+	Invalidate();
 }
 
+
+
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	CPoint pos;
+	pos.x = (point.x / B_SIZE) * B_SIZE;
+	pos.y = (point.y / B_SIZE) * B_SIZE;
+	POSITION p;
+	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
+		if (pos == object.Tile_list.GetAt(p)) {
+			return;
+		}
+		object.Tile_list.GetNext(p);
+	}
+	object.Tile_list.AddTail(pos);
+}
+
+
+
+void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	CPoint pos;
+	pos.x = (point.x / B_SIZE) * B_SIZE;
+	pos.y = (point.y / B_SIZE) * B_SIZE;
+	POSITION p;
+	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
+		if (pos == object.Tile_list.GetAt(p)) {
+			object.Tile_list.RemoveAt(p);
+			break;
+		}
+		object.Tile_list.GetNext(p);
+	}
+}
+
+
+void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	switch (nChar) {
+	case VK_LEFT:
+		object.c_LRstate = LEFT;
+		break;
+	case VK_RIGHT:
+		object.c_LRstate = RIGHT;
+		break;
+	case VK_UP:
+		if (object.c_UDstate == STOP)
+			object.c_UDstate = UP;
+		break;
+	}
+}
+
+
+void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	switch (nChar) {
+	case VK_LEFT:
+		object.c_LRstate = STOP;
+		break;
+	case VK_RIGHT:
+		object.c_LRstate = STOP;
+		break;
+	}
+}

@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MFCApplication1.h" />
     <ClInclude Include="Resource.h" />
@@ -194,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MFCApplication1.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -210,10 +212,16 @@
     <None Include="res\MFCApplication1.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\bitmap.bmp" />
     <Image Include="res\MFCApplication1.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="MFCApplication1.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

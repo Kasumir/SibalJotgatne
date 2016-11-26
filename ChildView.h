@@ -4,7 +4,7 @@
 
 
 #pragma once
-
+#include "GameObject.h"
 
 // CChildView 창
 
@@ -16,6 +16,7 @@ public:
 
 // 특성입니다.
 public:
+	GameObject object;
 
 // 작업입니다.
 public:
@@ -32,5 +33,11 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+//	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 };
 
