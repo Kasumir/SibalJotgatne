@@ -7,10 +7,11 @@ GameObject::GameObject()
 	c_UDstate = DOWN;
 	c_LRstate = STOP;
 	c_visible = FALSE;
+	jumpcount = 6;
 }
 GameObject::~GameObject()
 {
-
+	
 }
 void GameObject::check()
 {
@@ -22,18 +23,21 @@ void GameObject::check()
 		pos = Tile_list.GetNext(p);
 		if (c_UDstate == DOWN)
 		{
-			if (c_pos.x > pos.x - C_SIZE && c_pos.x < pos.x + B_SIZE && c_pos.y > pos.y - C_SIZE && c_pos.y < pos.y - C_SIZE + B_SIZE / 4)
+			if (c_pos.x > pos.x - C_SIZE && c_pos.x < pos.x + B_SIZE && c_pos.y > pos.y - C_SIZE && c_pos.y < pos.y - C_SIZE + B_SIZE / 2)
 			{
 				c_UDstate = STOP;
 				c_pos.y = pos.y - C_SIZE;
 			}
 		}
-		else if (c_UDstate != DOWN)
-			if (!(c_pos.x > pos.x - C_SIZE && c_pos.x < pos.x + B_SIZE && c_pos.y > pos.y - C_SIZE && c_pos.y < pos.y - C_SIZE + B_SIZE / 4))
+		else if (c_UDstate == STOP)
+			if (!(c_pos.x > pos.x - C_SIZE && c_pos.x < pos.x + B_SIZE && c_pos.y > pos.y - C_SIZE && c_pos.y < pos.y - C_SIZE + B_SIZE / 2))
 				count++;
 	}
 	if (count == Tile_list.GetCount())
 		c_UDstate = DOWN;
+	if (jumpcount == 6)
+		c_UDstate = DOWN;
+
 }
 void GameObject::CreateCharacter(int x, int y)
 {
@@ -52,10 +56,10 @@ void GameObject::move()
 		c_pos.y += 0;
 		break;
 	case UP:
-		c_pos.y -= 8;
+		c_pos.y -= 16;
 		break;
 	case DOWN:
-		c_pos.y += 8;
+		c_pos.y += 16;
 		break;
 	}
 	switch (c_LRstate) {

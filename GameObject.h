@@ -14,6 +14,7 @@ public:
 	CPoint c_pos;
 	int c_UDstate;
 	int c_LRstate;
+	int jumpcount;
 	BOOL c_bottom; //캐릭터발이 땅에 닿아있는지
 	BOOL c_left;  //캐릭터 왼쪽에 벽이 있는지
 	BOOL c_right; //캐릭터 오른쪽에 벽이 있는지

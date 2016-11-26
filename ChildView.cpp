@@ -30,6 +30,8 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 ON_WM_RBUTTONDOWN()
 ON_WM_KEYDOWN()
 ON_WM_KEYUP()
+ON_COMMAND(ID_SAVE, &CChildView::OnSave)
+ON_COMMAND(ID_LOAD, &CChildView::OnLoad)
 END_MESSAGE_MAP()
 
 
@@ -84,7 +86,8 @@ void CChildView::OnPaint()
 		dc.BitBlt(object.c_pos.x, object.c_pos.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 	}
 
-	Sleep(1000 / 16);     //프레임
+	Sleep(1000 / 8);     //프레임
+	object.jumpcount++;
 	Invalidate();
 }
 
@@ -133,8 +136,10 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		object.c_LRstate = RIGHT;
 		break;
 	case VK_UP:
-		if (object.c_UDstate == STOP)
+		if (object.c_UDstate == STOP) {
 			object.c_UDstate = UP;
+			object.jumpcount = 0;
+		}
 		break;
 	}
 }
@@ -149,5 +154,42 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	case VK_RIGHT:
 		object.c_LRstate = STOP;
 		break;
+	}
+}
+
+
+void CChildView::OnSave()
+{
+	CFile file;
+	CFileException e;
+	if (!file.Open(_T("mytext.txt"), CFile::modeCreate | CFile::modeWrite, &e)) {
+		e.ReportError();
+		return;
+	}
+	POSITION p;
+	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
+		int buf[2];
+		buf[0] = object.Tile_list.GetAt(p).x;
+		buf[1] = object.Tile_list.GetNext(p).y;
+		file.Write(buf, 2 * sizeof(int));
+	}
+}
+
+
+void CChildView::OnLoad()
+{
+	CFile file;
+	CFileException e;
+	if (!file.Open(_T("mytext.txt"), CFile::modeRead, &e)) {
+		e.ReportError();
+		return;
+	}
+	object.Tile_list.RemoveAll();
+	for (int i = 0; i < file.GetLength() / 8; i++)
+	{
+		int buf[2];
+		file.Read(buf, 2 * sizeof(int));
+		CPoint pos = { buf[0], buf[1] };
+		object.Tile_list.AddTail(pos);
 	}
 }
