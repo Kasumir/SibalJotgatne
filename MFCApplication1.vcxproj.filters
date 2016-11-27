@@ -113,5 +113,26 @@
     <Image Include="res\7.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\L1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\L2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\L3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\L4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\L5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\L6.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\L7.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

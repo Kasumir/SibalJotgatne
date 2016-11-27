@@ -6,15 +6,22 @@
 #define IDP_OLE_INIT_FAILED             100
 #define IDR_MAINFRAME                   128
 #define IDR_MFCApplication1TYPE         130
-#define IDB_BITMAP1                     310
+#define IDB_BLOCK                       310
 #define IDD_SAVE                        311
-#define IDB_BITMAP2                     327
-#define IDB_BITMAP3                     328
-#define IDB_BITMAP4                     329
-#define IDB_BITMAP5                     330
-#define IDB_BITMAP6                     331
-#define IDB_BITMAP7                     332
-#define IDB_BITMAP8                     333
+#define IDB_CR1                         334
+#define IDB_CR2                         335
+#define IDB_CR3                         336
+#define IDB_CR4                         337
+#define IDB_CR5                         338
+#define IDB_CR6                         339
+#define IDB_CR7                         340
+#define IDB_CL1                         341
+#define IDB_CL2                         342
+#define IDB_CL3                         343
+#define IDB_CL4                         344
+#define IDB_CL5                         345
+#define IDB_CL6                         346
+#define IDB_CL7                         347
 #define IDC_EDIT1                       1000
 #define ID_32771                        32771
 #define ID_32772                        32772
@@ -31,7 +38,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        334
+#define _APS_NEXT_RESOURCE_VALUE        348
 #define _APS_NEXT_COMMAND_VALUE         32781
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           310

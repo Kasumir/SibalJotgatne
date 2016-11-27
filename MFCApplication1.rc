@@ -79,21 +79,35 @@ IDR_MAINFRAME           ICON                    "res\\MFCApplication1.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
-IDB_BITMAP1             BITMAP                  "res\\bitmap.bmp"
+IDB_BLOCK               BITMAP                  "res\\bitmap.bmp"
 
-IDB_BITMAP2             BITMAP                  "res\\1.bmp"
+IDB_CR1                 BITMAP                  "res\\2.bmp"
 
-IDB_BITMAP3             BITMAP                  "res\\2.bmp"
+IDB_CR2                 BITMAP                  "res\\1.bmp"
 
-IDB_BITMAP4             BITMAP                  "res\\3.bmp"
+IDB_CR3                 BITMAP                  "res\\3.bmp"
 
-IDB_BITMAP5             BITMAP                  "res\\4.bmp"
+IDB_CR4                 BITMAP                  "res\\4.bmp"
 
-IDB_BITMAP6             BITMAP                  "res\\5.bmp"
+IDB_CR5                 BITMAP                  "res\\5.bmp"
 
-IDB_BITMAP7             BITMAP                  "res\\6.bmp"
+IDB_CR6                 BITMAP                  "res\\6.bmp"
 
-IDB_BITMAP8             BITMAP                  "res\\7.bmp"
+IDB_CR7                 BITMAP                  "res\\7.bmp"
+
+IDB_CL1                 BITMAP                  "res\\L1.bmp"
+
+IDB_CL2                 BITMAP                  "res\\L2.bmp"
+
+IDB_CL3                 BITMAP                  "res\\L3.bmp"
+
+IDB_CL4                 BITMAP                  "res\\L4.bmp"
+
+IDB_CL5                 BITMAP                  "res\\L5.bmp"
+
+IDB_CL6                 BITMAP                  "res\\L6.bmp"
+
+IDB_CL7                 BITMAP                  "res\\L7.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////

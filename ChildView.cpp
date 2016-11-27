@@ -26,7 +26,6 @@ CChildView::~CChildView()
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 	ON_WM_LBUTTONDOWN()
-//	ON_WM_LBUTTONUP()
 ON_WM_RBUTTONDOWN()
 ON_WM_KEYDOWN()
 ON_WM_KEYUP()
@@ -55,8 +54,8 @@ void CChildView::OnPaint()
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
-	CBitmap bitmap;
-	bitmap.LoadBitmap(IDB_BITMAP1);
+	CBitmap bitmap, c_bitmap;
+	bitmap.LoadBitmap(IDB_BLOCK);
 	BITMAP bmpinfo;
 	bitmap.GetBitmap(&bmpinfo);
 	CDC dcmem;
@@ -83,7 +82,34 @@ void CChildView::OnPaint()
 	{
 		object.move();
 		object.check();
-		dc.BitBlt(object.c_pos.x, object.c_pos.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
+		if (object.c_LRstate == STOP)
+		{
+			if (object.LRcount > 0) {
+				object.LRcount = 1;
+				c_bitmap.LoadBitmap(IDB_CR1);
+			}
+			else if (object.LRcount < 0){
+				object.LRcount = -1;
+				c_bitmap.LoadBitmap(IDB_CL1);
+			}
+		}
+		else if (object.c_LRstate == RIGHT)
+		{
+			object.LRcount++;
+			c_bitmap.LoadBitmap((object.LRcount % 6) + 335);
+		}
+		else if (object.c_LRstate == LEFT)
+		{
+			object.LRcount++;
+			c_bitmap.LoadBitmap((object.LRcount % 6) + 342);
+		}
+		BITMAP c_bmpinfo;
+		c_bitmap.GetBitmap(&c_bmpinfo);
+		CDC c_dcmem;
+		c_dcmem.CreateCompatibleDC(&dc);
+		c_dcmem.SelectObject(&c_bitmap);
+		//dc.BitBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, &c_dcmem, 0, 0, SRCCOPY);
+		dc.TransparentBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth/3, c_bmpinfo.bmHeight/3, &c_dcmem, 0,0, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, RGB(0, 255, 0));
 	}
 
 	Sleep(1000 / 8);     //프레임
@@ -150,8 +176,10 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	switch (nChar) {
 	case VK_LEFT:
 		object.c_LRstate = STOP;
+		object.LRcount = -1;
 		break;
 	case VK_RIGHT:
+		object.LRcount = 1;
 		object.c_LRstate = STOP;
 		break;
 	}

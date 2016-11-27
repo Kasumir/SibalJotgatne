@@ -8,6 +8,7 @@ GameObject::GameObject()
 	c_LRstate = STOP;
 	c_visible = FALSE;
 	jumpcount = 6;
+	LRcount = 1;
 }
 GameObject::~GameObject()
 {
