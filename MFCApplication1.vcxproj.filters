@@ -86,5 +86,32 @@
     <Image Include="bitmap.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\bitmap2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\1.png">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\3.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\4.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\5.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\6.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\7.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>
