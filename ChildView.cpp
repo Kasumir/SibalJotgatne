@@ -10,7 +10,7 @@
 #define new DEBUG_NEW
 #endif
 
-
+#define EDITMODE 1
 // CChildView
 
 CChildView::CChildView()

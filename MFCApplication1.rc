@@ -79,7 +79,7 @@ IDR_MAINFRAME           ICON                    "res\\MFCApplication1.ico"
 
 IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
 
-IDB_BITMAP1             BITMAP                  "C:\\Users\\Jongwon\\Desktop\\bitmap.bmp"
+IDB_BITMAP1             BITMAP                  "res\\bitmap.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -172,6 +172,17 @@ BEGIN
     DEFPUSHBUTTON   "확인",IDOK,113,41,50,14,WS_GROUP
 END
 
+IDD_SAVE DIALOGEX 0, 0, 198, 50
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "SAVE"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "저장",IDOK,138,6,50,14
+    PUSHBUTTON      "취소",IDCANCEL,138,24,50,14
+    EDITTEXT        IDC_EDIT1,7,24,126,14,ES_AUTOHSCROLL
+    LTEXT           "파일명 입력",IDC_STATIC,7,10,120,10
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -227,8 +238,27 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 55
     END
+
+    IDD_SAVE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 191
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 43
+    END
 END
 #endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_SAVE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
 
 
 /////////////////////////////////////////////////////////////////////////////

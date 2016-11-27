@@ -17,6 +17,7 @@ public:
 // 특성입니다.
 public:
 	GameObject object;
+	int s_state; //scene의 상태
 
 // 작업입니다.
 public:

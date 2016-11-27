@@ -213,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Desktop\bitmap.bmp" />
+    <Image Include="bitmap.bmp" />
+    <Image Include="res\bitmap.bmp" />
+    <Image Include="res\bitmap1.bmp" />
     <Image Include="res\MFCApplication1.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
