@@ -19,7 +19,7 @@ void GameObject::check()
 	POSITION p;
 	CPoint pos;
 	int count = 0;
-	for (p = Tile_list.GetHeadPosition(); p != NULL;)
+	for (p = Tile_list.GetHeadPosition(); p != NULL;) // 모르겠음 설명해주셈. 타일위에 붙어있게 하는거같은데..
 	{
 		pos = Tile_list.GetNext(p);
 		if (c_UDstate == DOWN)
