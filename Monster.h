@@ -5,7 +5,7 @@
 #define LEFT 1
 #define RIGHT 2
 #define UP 1
-#define DOWN 2
+#define DOWN 3
 class GameObject;
 // Monster
 
