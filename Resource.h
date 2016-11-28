@@ -24,8 +24,9 @@
 #define IDB_CL7                         347
 #define IDB_BLOCK2                      348
 #define IDB_BLOCK3                      349
-#define IDB_BITMAP1                     350
 #define IDB_BLOCK4                      350
+#define IDB_BITMAP1                     351
+#define IDB_MONSTER1                    351
 #define IDC_EDIT1                       1000
 #define ID_32771                        32771
 #define ID_32772                        32772
@@ -42,7 +43,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        351
+#define _APS_NEXT_RESOURCE_VALUE        352
 #define _APS_NEXT_COMMAND_VALUE         32781
 #define _APS_NEXT_CONTROL_VALUE         1001
 #define _APS_NEXT_SYMED_VALUE           310

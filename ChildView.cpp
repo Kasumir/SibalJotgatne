@@ -16,6 +16,7 @@
 CChildView::CChildView()
 {
 	object.CreateCharacter(0, 0);
+	monster1.MonsterCreate(500, 100);
 }
 
 CChildView::~CChildView()
@@ -50,7 +51,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	return TRUE;
 }
 
-void CChildView::OnPaint() 
+void CChildView::OnPaint()
 {
 	CPaintDC dc(this); // 그리기를 위한 디바이스 컨텍스트입니다.
 
@@ -60,7 +61,10 @@ void CChildView::OnPaint()
 	bitmap.GetBitmap(&bmpinfo);
 	CDC dcmem;
 	dcmem.CreateCompatibleDC(&dc);
-	dcmem.SelectObject(&bitmap);
+	dcmem.SelectObject(&bitmap); // 블록비트맵로딩.
+
+	CBitmap m1_bitmap;
+	
 
 	CRect rect;
 	GetWindowRect(&rect);
@@ -88,7 +92,7 @@ void CChildView::OnPaint()
 				object.LRcount = 1;
 				c_bitmap.LoadBitmap(IDB_CR1);
 			}
-			else if (object.LRcount < 0){
+			else if (object.LRcount < 0) {
 				object.LRcount = -1;
 				c_bitmap.LoadBitmap(IDB_CL1);
 			}
@@ -103,13 +107,29 @@ void CChildView::OnPaint()
 			object.LRcount++;
 			c_bitmap.LoadBitmap((object.LRcount % 6) + 342);
 		}
+
 		BITMAP c_bmpinfo;
 		c_bitmap.GetBitmap(&c_bmpinfo);
 		CDC c_dcmem;
 		c_dcmem.CreateCompatibleDC(&dc);
 		c_dcmem.SelectObject(&c_bitmap);
 		//dc.BitBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, &c_dcmem, 0, 0, SRCCOPY);
-		dc.TransparentBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth/3, c_bmpinfo.bmHeight/3, &c_dcmem, 0,0, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, RGB(0, 255, 0));
+		dc.TransparentBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth / 3, c_bmpinfo.bmHeight / 3, &c_dcmem, 0, 0, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, RGB(0, 255, 0));
+	}//캐릭터 크기 *2해주고 충돌처리 조정
+
+
+	if (monster1.m_visible == TRUE) // 따로 함수처리하려고 해봤는데 그냥하는게나을듯;
+	{
+		monster1.MoveState();
+		monster1.check();
+		m1_bitmap.LoadBitmap(IDB_MONSTER1);
+		
+		BITMAP m1_bmpinfo;
+		m1_bitmap.GetBitmap(&m1_bmpinfo);
+		CDC m1_dcmem;
+		m1_dcmem.CreateCompatibleDC(&dc);
+		m1_dcmem.SelectObject(&m1_bitmap);
+		dc.TransparentBlt(monster1.pos.x, monster1.pos.y, m1_bmpinfo.bmWidth , m1_bmpinfo.bmHeight , &m1_dcmem, 0, 0, m1_bmpinfo.bmWidth, m1_bmpinfo.bmHeight, RGB(0, 255, 0));
 	}
 
 	Sleep(1000 / 8);     //프레임
@@ -119,7 +139,7 @@ void CChildView::OnPaint()
 
 
 
-void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
+void CChildView::OnLButtonDown(UINT nFlags, CPoint point)//블록생성
 {
 	CPoint pos;
 	pos.x = (point.x / B_SIZE) * B_SIZE;
@@ -136,7 +156,7 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)
 
 
 
-void CChildView::OnRButtonDown(UINT nFlags, CPoint point)
+void CChildView::OnRButtonDown(UINT nFlags, CPoint point)//블록삭제
 {
 	CPoint pos;
 	pos.x = (point.x / B_SIZE) * B_SIZE;
