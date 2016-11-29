@@ -61,10 +61,17 @@ void CChildView::OnPaint()
 	bitmap.GetBitmap(&bmpinfo);
 	CDC dcmem;
 	dcmem.CreateCompatibleDC(&dc);
-	dcmem.SelectObject(&bitmap); // 블록비트맵로딩.
-
-	CBitmap m1_bitmap;
 	
+
+	CBitmap m1_bitmap, b1_bitmap;
+	b1_bitmap.LoadBitmap(IDB_BACKGROUND1);
+	BITMAP b1_bmpinfo;
+	b1_bitmap.GetBitmap(&b1_bmpinfo);
+	
+	dcmem.SelectObject(&b1_bitmap);
+	dc.StretchBlt(0, 0, b1_bmpinfo.bmWidth, b1_bmpinfo.bmHeight, &dcmem, 0, 0, b1_bmpinfo.bmWidth, b1_bmpinfo.bmHeight, SRCCOPY);//맵 그림. 맵 후에 다른거그려야함! 순서중요
+
+	dcmem.SelectObject(&bitmap); // 블록비트맵로딩.
 
 	CRect rect;
 	GetWindowRect(&rect);
@@ -76,12 +83,14 @@ void CChildView::OnPaint()
 		dc.MoveTo(i, 0);
 		dc.LineTo(i, rect.bottom);
 	}
+
 	POSITION p;
 	for (p = object.Tile_list.GetHeadPosition(); p != NULL;)    //블록출력
 	{
 		CPoint pos(object.Tile_list.GetNext(p));
 		dc.BitBlt(pos.x, pos.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 	}
+
 	if (object.c_visible)   //캐릭출력
 	{
 		object.move();

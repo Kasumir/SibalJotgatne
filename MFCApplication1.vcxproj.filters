@@ -146,5 +146,8 @@
     <Image Include="res\bmp00002.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\background1.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -117,6 +117,8 @@ IDB_BLOCK4              BITMAP                  "res\\bmp00001.bmp"
 
 IDB_MONSTER1            BITMAP                  "res\\bmp00002.bmp"
 
+IDB_BACKGROUND1         BITMAP                  "res\\background1.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
