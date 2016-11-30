@@ -36,7 +36,7 @@ public:
 	void StopState();
 	void check();
 	void MonsterDie();
-	CList<CPoint, CPoint&> Tile_list; // 벽돌을 내가 정의하는게 아닌거같은데-- GameObject에 정의되어있는 벽돌 변수를 어떻게 쓰지 ;ㅅ; 8ㅅ8 -> 게임오브젝트에서 전역.
+	CList<CPoint, CPoint&> Tile_list; 
 
 	void MonsterCreate(int x, int y);
 };
