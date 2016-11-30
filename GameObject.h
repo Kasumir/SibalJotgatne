@@ -26,13 +26,12 @@ public:
 
 public:
 	void move();
-	void check();
+	void check(CList<CPoint, CPoint&>*);
 	void CreateCharacter(int, int);
 	void DeleteCharacter();
 	GameObject();
 	~GameObject();
 
 public:
-	CList<CPoint, CPoint&> Tile_list;
-	CArray<CPoint, CPoint&> monster;
+	
 };

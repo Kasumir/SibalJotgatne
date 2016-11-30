@@ -16,7 +16,7 @@ class Monster : public CWnd
 	DECLARE_DYNAMIC(Monster)
 
 public:
-	CPoint pos;
+	CPoint m_pos;
 	Monster();
 	virtual ~Monster();
 	BOOL m_bottom; //몬스터발이 땅에 닿아있는지
@@ -26,7 +26,9 @@ public:
 	int m_UDstate;
 	int m_LRstate;
 	int jumpcount;
-	int LRcount;
+	int Lcount;
+	int Rcount;
+	int random1;
 	
 
 protected:
@@ -34,10 +36,8 @@ protected:
 public:
 	void MoveState();
 	void StopState();
-	void check();
+	void check(CList<CPoint, CPoint&>*);
 	void MonsterDie();
-	CList<CPoint, CPoint&> Tile_list; 
-
 	void MonsterCreate(int x, int y);
 };
 

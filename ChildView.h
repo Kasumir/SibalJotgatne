@@ -6,6 +6,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Monster.h"
+#include "afxtempl.h"
 
 // CChildView 창
 
@@ -20,7 +21,7 @@ public:
 	Monster monster1;
 	int s_state; //scene의 상태
 	GameObject object;
-
+	CList<CPoint, CPoint&> Tile_list;
 // 작업입니다.
 public:
 

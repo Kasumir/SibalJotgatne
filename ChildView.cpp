@@ -5,6 +5,9 @@
 #include "stdafx.h"
 #include "MFCApplication1.h"
 #include "ChildView.h"
+#include "Monster.h"
+#include "GameObject.h"
+#include "stdafx.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -85,16 +88,16 @@ void CChildView::OnPaint()
 	}
 
 	POSITION p;
-	for (p = object.Tile_list.GetHeadPosition(); p != NULL;)    //블록출력
+	for (p = Tile_list.GetHeadPosition(); p != NULL;)    //블록출력
 	{
-		CPoint pos(object.Tile_list.GetNext(p));
+		CPoint pos(Tile_list.GetNext(p));
 		dc.BitBlt(pos.x, pos.y, bmpinfo.bmWidth, bmpinfo.bmHeight, &dcmem, 0, 0, SRCCOPY);
 	}
 
 	if (object.c_visible)   //캐릭출력
 	{
 		object.move();
-		object.check();
+		object.check(&Tile_list);
 		if (object.c_LRstate == STOP)
 		{
 			if (object.LRcount > 0) {
@@ -124,13 +127,13 @@ void CChildView::OnPaint()
 		c_dcmem.SelectObject(&c_bitmap);
 		//dc.BitBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, &c_dcmem, 0, 0, SRCCOPY);
 		dc.TransparentBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth / 3, c_bmpinfo.bmHeight / 3, &c_dcmem, 0, 0, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, RGB(0, 255, 0));
-	}//캐릭터 크기 *2해주고 충돌처리 조정
+	}
 
 
-	if (monster1.m_visible == TRUE) // 따로 함수처리하려고 해봤는데 그냥하는게나을듯;
+	if (monster1.m_visible == TRUE) 
 	{
 		monster1.MoveState();
-		monster1.check();
+		monster1.check(&Tile_list);
 		m1_bitmap.LoadBitmap(IDB_MONSTER1);
 		
 		BITMAP m1_bmpinfo;
@@ -138,11 +141,12 @@ void CChildView::OnPaint()
 		CDC m1_dcmem;
 		m1_dcmem.CreateCompatibleDC(&dc);
 		m1_dcmem.SelectObject(&m1_bitmap);
-		dc.TransparentBlt(monster1.pos.x, monster1.pos.y, m1_bmpinfo.bmWidth , m1_bmpinfo.bmHeight , &m1_dcmem, 0, 0, m1_bmpinfo.bmWidth, m1_bmpinfo.bmHeight, RGB(0, 255, 0));
+		dc.TransparentBlt(monster1.m_pos.x, monster1.m_pos.y, m1_bmpinfo.bmWidth , m1_bmpinfo.bmHeight , &m1_dcmem, 0, 0, m1_bmpinfo.bmWidth, m1_bmpinfo.bmHeight, RGB(0, 255, 0));
 	}
 
 	Sleep(1000 / 8);     //프레임
 	object.jumpcount++;
+	monster1.jumpcount++;
 	Invalidate();
 }
 
@@ -154,14 +158,13 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)//블록생성
 	pos.x = (point.x / B_SIZE) * B_SIZE;
 	pos.y = (point.y / B_SIZE) * B_SIZE;
 	POSITION p;
-	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
-		if (pos == object.Tile_list.GetAt(p)) {
+	for (p = Tile_list.GetHeadPosition(); p != NULL;) {
+		if (pos == Tile_list.GetAt(p)) {
 			return;
 		}
-		object.Tile_list.GetNext(p);
+		Tile_list.GetNext(p);
 	}
-	object.Tile_list.AddTail(pos);
-	monster1.Tile_list.AddTail(pos);
+	Tile_list.AddTail(pos);
 }
 
 
@@ -172,21 +175,14 @@ void CChildView::OnRButtonDown(UINT nFlags, CPoint point)//블록삭제
 	pos.x = (point.x / B_SIZE) * B_SIZE;
 	pos.y = (point.y / B_SIZE) * B_SIZE;
 	POSITION p;
-	POSITION p1;
-	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
-		if (pos == object.Tile_list.GetAt(p)) {
-			object.Tile_list.RemoveAt(p);
+	for (p = Tile_list.GetHeadPosition(); p != NULL;) {
+		if (pos == Tile_list.GetAt(p)) {
+			Tile_list.RemoveAt(p);
 			break;
 		}
-		object.Tile_list.GetNext(p);
+		Tile_list.GetNext(p);
 	}
-	for (p1 = monster1.Tile_list.GetHeadPosition(); p1 != NULL;) {
-		if (pos == monster1.Tile_list.GetAt(p)) {
-			monster1.Tile_list.RemoveAt(p);
-			break;
-		}
-		monster1.Tile_list.GetNext(p);
-	}
+	
 }
 
 
@@ -233,10 +229,10 @@ void CChildView::OnSave()
 		return;
 	}
 	POSITION p;
-	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
+	for (p = Tile_list.GetHeadPosition(); p != NULL;) {
 		int buf[2];
-		buf[0] = object.Tile_list.GetAt(p).x;
-		buf[1] = object.Tile_list.GetNext(p).y;
+		buf[0] = Tile_list.GetAt(p).x;
+		buf[1] = Tile_list.GetNext(p).y;
 		file.Write(buf, 2 * sizeof(int));
 	}
 }
@@ -250,12 +246,12 @@ void CChildView::OnLoad()
 		e.ReportError();
 		return;
 	}
-	object.Tile_list.RemoveAll();
+	Tile_list.RemoveAll();
 	for (int i = 0; i < file.GetLength() / 8; i++)
 	{
 		int buf[2];
 		file.Read(buf, 2 * sizeof(int));
 		CPoint pos = { buf[0], buf[1] };
-		object.Tile_list.AddTail(pos);
+		Tile_list.AddTail(pos);
 	}
 }
