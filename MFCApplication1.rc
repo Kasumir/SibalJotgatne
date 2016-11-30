@@ -109,6 +109,16 @@ IDB_CL6                 BITMAP                  "res\\L6.bmp"
 
 IDB_CL7                 BITMAP                  "res\\L7.bmp"
 
+IDB_BLOCK2              BITMAP                  "res\\bitmap1.bmp"
+
+IDB_BLOCK3              BITMAP                  "res\\bitmap2.bmp"
+
+IDB_BLOCK4              BITMAP                  "res\\bmp00001.bmp"
+
+IDB_MONSTER1            BITMAP                  "res\\bmp00002.bmp"
+
+IDB_BACKGROUND1         BITMAP                  "res\\background1.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

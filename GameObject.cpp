@@ -19,7 +19,7 @@ void GameObject::check()
 	POSITION p;
 	CPoint pos;
 	int count = 0;
-	for (p = Tile_list.GetHeadPosition(); p != NULL;)
+	for (p = Tile_list.GetHeadPosition(); p != NULL;) // 모든 벽돌에 대해 돎.
 	{
 		pos = Tile_list.GetNext(p);
 		if (c_UDstate == DOWN)
@@ -30,12 +30,12 @@ void GameObject::check()
 				c_pos.y = pos.y - C_SIZE;
 			}
 		}
-		else if (c_UDstate == STOP)
+		else if (c_UDstate == STOP) // 밑에 벽돌이 있는지 없는지 검사.
 			if (!(c_pos.x > pos.x - C_SIZE && c_pos.x < pos.x + B_SIZE && c_pos.y > pos.y - C_SIZE && c_pos.y < pos.y - C_SIZE + B_SIZE / 2))
-				count++;
+				count++;//밑에 모든 벽돌이 없는지 검사.
 	}
 	if (count == Tile_list.GetCount())
-		c_UDstate = DOWN;
+		c_UDstate = DOWN; // 타일숫자 = 검사한 숫자 -> 떨어짐.
 	if (jumpcount == 6)
 		c_UDstate = DOWN;
 

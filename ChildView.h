@@ -5,6 +5,7 @@
 
 #pragma once
 #include "GameObject.h"
+#include "Monster.h"
 
 // CChildView 창
 
@@ -17,6 +18,7 @@ public:
 // 특성입니다.
 public:
 	GameObject object;
+	Monster monster1;
 	int s_state; //scene의 상태
 
 // 작업입니다.
@@ -41,5 +43,6 @@ public:
 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnSave();
 	afx_msg void OnLoad();
+	
 };
 
