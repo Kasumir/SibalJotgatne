@@ -161,6 +161,7 @@ void CChildView::OnLButtonDown(UINT nFlags, CPoint point)//블록생성
 		object.Tile_list.GetNext(p);
 	}
 	object.Tile_list.AddTail(pos);
+	monster1.Tile_list.AddTail(pos);
 }
 
 
@@ -171,12 +172,20 @@ void CChildView::OnRButtonDown(UINT nFlags, CPoint point)//블록삭제
 	pos.x = (point.x / B_SIZE) * B_SIZE;
 	pos.y = (point.y / B_SIZE) * B_SIZE;
 	POSITION p;
+	POSITION p1;
 	for (p = object.Tile_list.GetHeadPosition(); p != NULL;) {
 		if (pos == object.Tile_list.GetAt(p)) {
 			object.Tile_list.RemoveAt(p);
 			break;
 		}
 		object.Tile_list.GetNext(p);
+	}
+	for (p1 = monster1.Tile_list.GetHeadPosition(); p1 != NULL;) {
+		if (pos == monster1.Tile_list.GetAt(p)) {
+			monster1.Tile_list.RemoveAt(p);
+			break;
+		}
+		monster1.Tile_list.GetNext(p);
 	}
 }
 

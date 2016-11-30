@@ -17,9 +17,9 @@ public:
 
 // 특성입니다.
 public:
-	GameObject object;
 	Monster monster1;
 	int s_state; //scene의 상태
+	GameObject object;
 
 // 작업입니다.
 public:
@@ -43,6 +43,5 @@ public:
 	afx_msg void OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags);
 	afx_msg void OnSave();
 	afx_msg void OnLoad();
-	
 };
 

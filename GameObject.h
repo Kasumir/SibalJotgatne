@@ -9,6 +9,8 @@
 #define RIGHT 2
 #define UP 1
 #define DOWN 2
+
+
 class GameObject  //모든 오브젝트를 관리할 클레스
 {
 public:

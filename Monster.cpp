@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "MFCApplication1.h"
 #include "Monster.h"
-
+#include "ChildView.h"
 
 
 // Monster
