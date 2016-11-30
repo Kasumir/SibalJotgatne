@@ -32,4 +32,5 @@ public:
 
 public:
 	CList<CPoint, CPoint&> Tile_list;
+	CArray<CPoint, CPoint&> monster;
 };
