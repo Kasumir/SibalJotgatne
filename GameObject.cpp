@@ -68,10 +68,10 @@ void GameObject::move()
 		c_pos.x += 0;
 		break;
 	case LEFT:
-		c_pos.x -= 8;
+		c_pos.x -= 12;
 		break;
 	case RIGHT:
-		c_pos.x += 8;
+		c_pos.x += 12;
 		break;
 	}
 }
