@@ -121,7 +121,7 @@ IDB_BACKGROUND1         BITMAP                  "res\\background1.bmp"
 
 IDB_BACKGROUND2         BITMAP                  "res\\background4.bmp"
 
-IDB_WaterDrop           BITMAP                  "C:\\Users\\JH\\Documents\\Visual Studio 2015\\Source\\MFCproject\\res\\bmp00003.bmp"
+IDB_WaterDrop           BITMAP                  "res\\bubble.bmp"
 
 
 /////////////////////////////////////////////////////////////////////////////
