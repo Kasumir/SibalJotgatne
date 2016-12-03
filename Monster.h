@@ -2,7 +2,7 @@
 
 #define M_SIZE 48		//몬스터의 가로 세로 길이.
 #define B_SIZE 48      //블록의 가로 세로 길이
-#define C_SIZE 48      //캐릭터의 가로 세로 길이
+#define C_SIZE 80      //캐릭터의 가로 세로 길이
 #define STOP 0
 #define LEFT 1
 #define RIGHT 2

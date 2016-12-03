@@ -72,7 +72,7 @@ void CChildView::OnPaint()
 	b1_bitmap.GetBitmap(&b1_bmpinfo);
 	
 	dcmem.SelectObject(&b1_bitmap);
-	dc.StretchBlt(0, 0, b1_bmpinfo.bmWidth, b1_bmpinfo.bmHeight, &dcmem, 0, 0, b1_bmpinfo.bmWidth, b1_bmpinfo.bmHeight, SRCCOPY);//맵 그림. 맵 후에 다른거그려야함! 순서중요
+	dc.StretchBlt(0, 0, b1_bmpinfo.bmWidth*4/3, b1_bmpinfo.bmHeight*4/3, &dcmem, 0, 0, b1_bmpinfo.bmWidth, b1_bmpinfo.bmHeight, SRCCOPY);//맵 그림. 맵 후에 다른거그려야함! 순서중요
 
 	dcmem.SelectObject(&bitmap); // 블록비트맵로딩.
 
@@ -126,7 +126,7 @@ void CChildView::OnPaint()
 		c_dcmem.CreateCompatibleDC(&dc);
 		c_dcmem.SelectObject(&c_bitmap);
 		//dc.BitBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, &c_dcmem, 0, 0, SRCCOPY);
-		dc.TransparentBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth / 3, c_bmpinfo.bmHeight / 3, &c_dcmem, 0, 0, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, RGB(0, 255, 0));
+		dc.TransparentBlt(object.c_pos.x, object.c_pos.y, c_bmpinfo.bmWidth *2/ 3, c_bmpinfo.bmHeight*2/ 3, &c_dcmem, 0, 0, c_bmpinfo.bmWidth, c_bmpinfo.bmHeight, RGB(0, 255, 0));
 	}
 
 
@@ -235,6 +235,7 @@ void CChildView::OnSave()
 		buf[1] = Tile_list.GetNext(p).y;
 		file.Write(buf, 2 * sizeof(int));
 	}
+
 }
 
 

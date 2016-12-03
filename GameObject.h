@@ -3,7 +3,7 @@
 //몬스터는 여러마리를 생성하므로... 여기에 함수 쓰면서 했는데 안되서 클래스로 보냄.
 
 #define B_SIZE 48      //블록의 가로 세로 길이
-#define C_SIZE 48      //캐릭터의 가로 세로 길이
+#define C_SIZE 80      //캐릭터의 가로 세로 길이
 #define STOP 0
 #define LEFT 1
 #define RIGHT 2

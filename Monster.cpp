@@ -68,10 +68,6 @@ void Monster::MoveState()//돌아다니다가 유저를 인식하면 쫓아감
 		Rcount = 0;
 	}
 
-	
-	
-	//if( 1차 충돌판정시 쫓아감. (1차 충돌판정 : 몬스터가 캐릭터를 인식하는 범위))
-
 	switch (m_UDstate) {
 	case STOP:
 		m_pos.y += 0;
