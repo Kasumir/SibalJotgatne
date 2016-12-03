@@ -235,6 +235,7 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 		break;
 	case VK_SPACE:
 		object.c_space = TRUE;
+		object.wdcount[0] = 0;
 		break;
 	}
 }
