@@ -168,7 +168,7 @@ void CChildView::OnPaint()
 		for (int i = 1; i <= 3; i++) {
 			if (object.wdcount[i] != 0) {
 				pos = object.Water_drop.GetAt(i);
-				dc.TransparentBlt(pos.x, pos.y, wd_bmpinfo.bmWidth, wd_bmpinfo.bmHeight, &wd_dcmem, 0, 0, wd_bmpinfo.bmWidth, wd_bmpinfo.bmHeight, RGB(255, 255, 255));
+				dc.TransparentBlt(pos.x, pos.y, wd_bmpinfo.bmWidth, wd_bmpinfo.bmHeight, &wd_dcmem, 0, 0, wd_bmpinfo.bmWidth, wd_bmpinfo.bmHeight, RGB(0, 255, 0));
 			}
 		}
 		object.WaterDropMove();
