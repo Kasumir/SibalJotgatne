@@ -66,7 +66,7 @@ void CChildView::OnPaint()
 	dcmem.CreateCompatibleDC(&dc);
 	
 
-	CBitmap m1_bitmap, b1_bitmap;
+	CBitmap m1_bitmap, b1_bitmap, wd_bitmap;
 	b1_bitmap.LoadBitmap(IDB_BACKGROUND1);
 	BITMAP b1_bmpinfo;
 	b1_bitmap.GetBitmap(&b1_bmpinfo);
@@ -143,6 +143,36 @@ void CChildView::OnPaint()
 		m1_dcmem.SelectObject(&m1_bitmap);
 		dc.TransparentBlt(monster1.m_pos.x, monster1.m_pos.y, m1_bmpinfo.bmWidth , m1_bmpinfo.bmHeight , &m1_dcmem, 0, 0, m1_bmpinfo.bmWidth, m1_bmpinfo.bmHeight, RGB(0, 255, 0));
 	}
+	//스페이스 바가 눌렸을 때, 물방울을 생성합니다.
+	if (object.c_space == TRUE) {
+		object.WaterDrop();
+		object.wdcount[0] += 1;
+		if (object.wdcount[0] == 8)
+			object.wdcount[0] = 0;
+
+	}
+	else if (object.wdcount[1] == 0 && object.wdcount[2] == 0 && object.wdcount[3] == 0)
+		object.wdcount[0] = 0;
+
+	//물방울을 출력하는 코드입니다.
+
+	if (object.wd_visible == TRUE) {
+
+		wd_bitmap.LoadBitmap(IDB_WaterDrop);
+		BITMAP wd_bmpinfo;
+		wd_bitmap.GetBitmap(&wd_bmpinfo);
+		CDC wd_dcmem;
+		CPoint pos;
+		wd_dcmem.CreateCompatibleDC(&dc);
+		wd_dcmem.SelectObject(&wd_bitmap);
+		for (int i = 1; i <= 3; i++) {
+			if (object.wdcount[i] != 0) {
+				pos = object.Water_drop.GetAt(i);
+				dc.TransparentBlt(pos.x, pos.y, wd_bmpinfo.bmWidth, wd_bmpinfo.bmHeight, &wd_dcmem, 0, 0, wd_bmpinfo.bmWidth, wd_bmpinfo.bmHeight, RGB(255, 255, 255));
+			}
+		}
+		object.WaterDropMove();
+	}
 
 	Sleep(1000 / 8);     //프레임
 	object.jumpcount++;
@@ -191,15 +221,20 @@ void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 	switch (nChar) {
 	case VK_LEFT:
 		object.c_LRstate = LEFT;
+		object.c_lastLRstate = LEFT;
 		break;
 	case VK_RIGHT:
 		object.c_LRstate = RIGHT;
+		object.c_lastLRstate = RIGHT;
 		break;
 	case VK_UP:
 		if (object.c_UDstate == STOP) {
 			object.c_UDstate = UP;
 			object.jumpcount = 0;
 		}
+		break;
+	case VK_SPACE:
+		object.c_space = TRUE;
 		break;
 	}
 }
@@ -215,6 +250,9 @@ void CChildView::OnKeyUp(UINT nChar, UINT nRepCnt, UINT nFlags)
 	case VK_RIGHT:
 		object.LRcount = 1;
 		object.c_LRstate = STOP;
+		break;
+	case VK_SPACE:
+		object.c_space = FALSE;
 		break;
 	}
 }

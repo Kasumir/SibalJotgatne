@@ -215,6 +215,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\Desktop\bitmap.bmp" />
+    <Image Include="..\MFCproject\res\bmp00003.bmp" />
     <Image Include="bitmap.bmp" />
     <Image Include="res\1.bmp" />
     <Image Include="res\1.png" />
